@@ -1,0 +1,11 @@
+---
+# This playbook deploys the whole application stack in this site.
+- name: from server backup file to local
+  hosts: localhost
+  vars:
+        env: "product"
+  vars_files:
+        - "roles/server_backup/vars/{{ env }}.yml"
+  roles:
+    - server_backup
+

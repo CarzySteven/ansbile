@@ -1,0 +1,4 @@
+backupPath:
+  # - host: "host name"
+  #   path: "backup path"
+  #   patterns: "backup file regular"

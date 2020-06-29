@@ -1,0 +1,29 @@
+- name: Ansible get file to glob
+  find:
+    paths: "{{ item.path }}"
+    patterns: "{{ item.patterns }}"
+  register: files_to_backup
+  with_items: "{{ backupPath }}"
+  become: true
+  no_log: True
+  when: 
+    - (inventory_hostname) == (item.host)
+
+- set_fact:
+    backupFiles: "{{ backupFiles | default([]) | union([item.files]) }}"
+  with_items: "{{ files_to_backup.results }}"
+  when:
+    - (item.files) is defined
+  no_log: True
+
+- name: backup file
+  fetch:
+    src: "{{ item.path }}"
+    dest: "backup/{{ env }}/"
+    flat: "no"
+  with_items: "{{ backupFiles }}"
+  become: true
+  no_log: True
+  when:
+    - (backupFiles) is defined
+
