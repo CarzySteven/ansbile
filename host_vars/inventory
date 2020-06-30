@@ -1,1 +1,7 @@
 localhost   ansible_connection=local
+
+# ssh key example
+# host_name ansible_host=x.x.x.x ansible_ssh_user=ssh_user ansible_ssh_private_key_file=ssh_key 
+
+# password example 
+# host_name ansible_host=x.x.x.x ansible_ssh_user=ssh_user ansible_become=yes ansible_ssh_pass="password" ansible_sudo_pass="password"
